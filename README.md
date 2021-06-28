@@ -1,2 +1,2 @@
-# ragnarok
-Inevitable doom but trying to prevent it
+# Ragnarok
+Trying to prevent the inevitable doom!
