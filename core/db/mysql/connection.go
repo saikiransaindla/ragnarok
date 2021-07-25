@@ -1,34 +1,37 @@
 package mysql
 
 import (
-	"database/sql"
 	"fmt"
 	"log"
 
-	"github.com/go-sql-driver/mysql"
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
 )
 
-var mysqlDB *sql.DB
+var mysqlDB *gorm.DB
 
 func NewConnection() {
-	config := mysql.Config{
-		User:                 "root",
-		Passwd:               "password",
-		Net:                  "tcp",
-		Addr:                 "127.0.0.1:3306",
-		DBName:               "ragnarok",
-		AllowNativePasswords: true,
-	}
+	// config := mysql.Config{
+	// 	User:                 "root",
+	// 	Passwd:               "password",
+	// 	Net:                  "tcp",
+	// 	Addr:                 "127.0.0.1:3306",
+	// 	DBName:               "ragnarok",
+	// 	AllowNativePasswords: true,
+	// }
 
 	var err error
 
-	mysqlDB, err = sql.Open("mysql", config.FormatDSN())
+	const dsn = "root:password@tcp(127.0.0.1:3306)/ragnarok"
+
+	mysqlDB, err = gorm.Open(mysql.Open(dsn))
 
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	pingError := mysqlDB.Ping()
+	db, _ := mysqlDB.DB()
+	pingError := db.Ping()
 
 	if pingError != nil {
 		log.Fatal(pingError)
@@ -38,7 +41,8 @@ func NewConnection() {
 }
 
 func Ping() bool {
-	pingError := mysqlDB.Ping()
+	db, _ := mysqlDB.DB()
+	pingError := db.Ping()
 
 	return pingError == nil
 }
