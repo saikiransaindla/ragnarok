@@ -12,3 +12,7 @@ App setup
 - Clone this app inside $GOPATH/src
 - go mod init
 - download gin `go get -u github.com/gin-gonic/gin`
+
+TODO:
+- Add migration file
+- Add env specific configs

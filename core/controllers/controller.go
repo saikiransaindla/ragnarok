@@ -3,6 +3,8 @@ package controller
 import (
 	"time"
 
+	mysql "ragnarok/core/db/mysql"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -13,8 +15,10 @@ type Welcome struct {
 }
 
 func PingController(res *gin.Context) {
+	mysqlConnected := mysql.Ping()
 	res.JSON(200, gin.H{
-		"message": "PONG",
+		"message":        "PONG",
+		"mysqlConnected": mysqlConnected,
 	})
 }
 
