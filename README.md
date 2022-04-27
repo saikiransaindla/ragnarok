@@ -13,6 +13,9 @@ App setup
 - go mod init
 - download gin `go get -u github.com/gin-gonic/gin`
 
+DB Migration
+- brew install golang-migrate
+- `make migrateup`
+
 TODO:
-- Add migration file
 - Add env specific configs
