@@ -8,7 +8,7 @@ import (
 	"gorm.io/gorm"
 )
 
-var mysqlDB *gorm.DB
+var MysqlDB *gorm.DB
 
 func NewConnection() {
 	// config := mysql.Config{
@@ -24,24 +24,33 @@ func NewConnection() {
 
 	const dsn = "root:password@tcp(127.0.0.1:3306)/ragnarok"
 
-	mysqlDB, err = gorm.Open(mysql.Open(dsn))
+	MysqlDB, err = gorm.Open(mysql.Open(dsn))
 
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	db, _ := mysqlDB.DB()
+	db, _ := MysqlDB.DB()
 	pingError := db.Ping()
 
 	if pingError != nil {
 		log.Fatal(pingError)
 	}
 
+	// // SetMaxIdleConns sets the maximum number of connections in the idle connection pool.
+	// db.SetMaxIdleConns(10)
+
+	// // SetMaxOpenConns sets the maximum number of open connections to the database.
+	// db.SetMaxOpenConns(100)
+
+	// // SetConnMaxLifetime sets the maximum amount of time a connection may be reused.
+	// db.SetConnMaxLifetime(time.Hour)
+
 	fmt.Println("MySQL Connected")
 }
 
 func Ping() bool {
-	db, _ := mysqlDB.DB()
+	db, _ := MysqlDB.DB()
 	pingError := db.Ping()
 
 	return pingError == nil
