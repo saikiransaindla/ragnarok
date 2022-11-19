@@ -15,6 +15,7 @@ App setup
 
 DB Migration
 - brew install golang-migrate
+- Create database `ragnarok` on MySQL 
 - `make migrateup`
 
 TODO:
