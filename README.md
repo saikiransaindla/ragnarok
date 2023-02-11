@@ -13,6 +13,10 @@ App setup
 - go mod init
 - download gin `go get -u github.com/gin-gonic/gin`
 
+DB Migration
+- brew install golang-migrate
+- Create database `ragnarok` on MySQL 
+- `make migrateup`
+
 TODO:
-- Add migration file
 - Add env specific configs

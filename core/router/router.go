@@ -18,5 +18,13 @@ func NewRouter() *gin.Engine {
 
 	router.GET("/", controller.WelcomePage)
 
+	router.POST("/v1/user", controller.CreateUser)
+
+	router.PATCH("v1/user", controller.UpdateUser)
+
+	router.GET("v1/user", controller.FetchUser)
+
+	router.GET("v1/users", controller.FetchUsers)
+
 	return router
 }
