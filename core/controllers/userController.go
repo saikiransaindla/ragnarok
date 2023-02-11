@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"fmt"
 	mysql "ragnarok/core/db/mysql"
 	"ragnarok/core/models"
 
@@ -8,14 +9,14 @@ import (
 )
 
 func CreateUser(ctx *gin.Context) {
-	user := models.User{Id:"abcd1", Name:"Sai", Email:"saikiran@gmail.com"}
+	user := models.User{Id: "abcd1", Name: "Sai", Email: "saikiran@gmail.com"}
 
 	result := mysql.MysqlDB.Create(&user)
-
+	fmt.Println(result, user, ctx)
 	ctx.JSON(200, gin.H{
-		"message":        "PONG",
-		"result": result,
-		"param": ctx.Param("name"),
+		"message": "PONG",
+		"result":  user,
+		//"param":   ctx.Request.GetBody,
 	})
 }
 
@@ -28,14 +29,14 @@ func UpdateUser(ctx *gin.Context) {
 }
 
 func FetchUser(ctx *gin.Context) {
-	user := models.User{Id:"abcd4", Name:"Sai", Email:"saikiran@gmail.com"}
+	user := models.User{Id: "abcd4", Name: "Sai", Email: "saikiran@gmail.com"}
 
 	mysql.MysqlDB.Create(&user)
 
 	ctx.JSON(200, gin.H{
-		"message":"PONG",
-		"result": user,
-		"param": ctx.Param("name"),
+		"message": "PONG",
+		"result":  user,
+		"param":   ctx.Param("name"),
 	})
 }
 
